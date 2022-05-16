@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+    var size_of_alphabet = 26;
+    class node_of_Trie
+    {
+    	constructor()
+    	{
+    		this.End = false;
+    		this.child = new Array(size_of_alphabet);
+    		for (let i = 0; i < size_of_alphabet; i++)
+    			this.child[i] = null;
+    	}
+    }
+    var root_node;
+    function insert_string(str)
+    {
+      	let i;
+    		let total_size_of_string = str.length;
+    		let number_of_index;
+    		let temp = root_node;
+    		for (i = 0; i < total_size_of_string; i++)
+    		{
+    			number_of_index = str[i].charCodeAt(0) - 'a'.charCodeAt(0);
+    			if (temp.child[number_of_index] == null)
+    				temp.child[number_of_index] = new node_of_Trie();
+    			temp = temp.child[number_of_index];
+          temp.End = true;
+    		}
+    }
+    function search_string(str)
+    {
+      	let i;
+    		let total_size_of_string= str.length;
+    		let number_of_index;
+    		let temp = root_node;
+    		for (i = 0; i < total_size_of_string; i++)
+    		{
+    			number_of_index = str[i].charCodeAt(0) - 'a'.charCodeAt(0);
+    			if (temp.child[number_of_index] == null)
+    				return false;
+    			temp = temp.child[number_of_index];
+    		}
+    		return (temp.End);
+    }
+
+    var str = ["then", "an", "their",
+					"egg", "any", "ink",
+					"king", "gun"];
+
+    var display = ["Not present in trie", "Present in trie"];
+
+    root_node = new node_of_Trie();
+    let x;
+    for (x = 0; x < str.length ; x++)
+    	insert_string(str[x]);
+    if(search_string("then") == true)
+    	document.write("then --- " + display[1]+"<br>");
+    else
+    	document.write("then --- " + display[0]+"<br>");
+
+    if(search_string("that") == true)
+    	document.write("that --- " + display[1]+"<br>");
+    else
+    	document.write("that --- " + display[0]+"<br>");
+
+    if(search_string("king") == true)
+    	document.write("king --- " + display[1]+"<br>");
+    else
+    	document.write("kingr --- " + display[0]+"<br>");
+
+    if(search_string("gun") == true)
+    	document.write("gun --- " + display[1]+"<br>");
+    else
+    	document.write("gun --- " + display[0]+"<br>");
+    </script>
+  </body>
+</html>
